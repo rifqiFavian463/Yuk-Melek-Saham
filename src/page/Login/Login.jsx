@@ -1,6 +1,35 @@
+import { useState } from "react";
 function Login() {
+  const [user, setUser] = useState("");
+  const [pass, setPass] = useState("");
+  const [error, setError] = useState("");
+  const [identity, setIdentity] = useState({})
+  const [msg, setMsg] = useState("");
+
+  const handleIdentity = (e) => {
+    e.preventDefault();
+    setIdentity({
+      username : user,
+      password : pass
+    })
+    console.log(identity)
+    if (identity.username || identity.password === ""){
+        alert("kolom masih kosong")
+      }
+  }
+  const handleInputChange = (e,type)=>{
+    if (type === "user"){
+      setError("");
+      setUser(e.target.value);
+    };
+    if (type === "password"){
+      setError("");
+      setPass(e.target.value);
+    }
+  }
   return (
     <div>
+      {error !== ""? <span>{error}</span> : <span>{user}</span>}
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
@@ -21,6 +50,7 @@ function Login() {
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
+                    onChange={(e) => handleInputChange(e, "user") }
                     required=""
                   />
                 </div>
@@ -58,6 +88,7 @@ function Login() {
                     Forgot password?
                   </a>
                 </div>
+                <button className="bg-red-600 p-3 rounded" type="button" onClick={(e)=>handleIdentity(e)}>Log in</button>
                 <button
                   type="submit"
                   className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"

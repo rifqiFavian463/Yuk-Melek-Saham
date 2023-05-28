@@ -10,7 +10,6 @@ export default function App() {
       <Route path="/" element={<Login />} />
       <Route path="/Home" element={<Home />} />
       <Route path="/Tujuan" element={<Tujuan />} />
-      <button>Test</button>
     </Routes>
   );
 }
